@@ -11,9 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
+        
         Schema::create('textbox_answers', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            // Fields
+            $table->text('expected_answer')->nullable();
+            $table->text('alternative_answer')->nullable();
+            // Foreign Keys
+            $table->foreignId('question_id')->constrained('questions');
         });
     }
 
