@@ -9,7 +9,7 @@ class Course extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'created_by'];
+    protected $fillable = ['title', 'description', 'created_by', 'media_link', 'is_published'];
 
     public function creator()
     {

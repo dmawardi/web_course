@@ -17,7 +17,6 @@ return new class extends Migration
             // Fields
             $table->string('title');
             $table->text('description');
-            $table->string('media_link')->nullable();
             $table->integer('order');
             // Foreign Keys
             $table->foreignId('course_id')->constrained('courses');

@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
+            $table->string('media_link')->nullable();
+            $table->boolean('is_published')->default(false);
             // Foreign Keys
             $table->foreignId('created_by')->constrained('users');
             $table->timestamps();

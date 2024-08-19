@@ -20,6 +20,7 @@ class ModuleFactory extends Factory
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
             'order' => $this->faker->numberBetween(1, 25),
+            'media_link' => $this->faker->url,
         ];
     }
 

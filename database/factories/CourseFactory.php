@@ -22,6 +22,8 @@ class CourseFactory extends Factory
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
             'created_by' => $user->id,
+            'media_link' => $this->faker->url,
+            'is_published' => $this->faker->boolean,
         ];
     }
 }
