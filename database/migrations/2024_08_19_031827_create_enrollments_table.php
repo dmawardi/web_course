@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             // Fields
             $table->timestamp('enrolled_at')->useCurrent();
+            $table->timestamp('completed_at')->nullable();
             // Foreign keys
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('course_id')->constrained()->onDelete('cascade');
