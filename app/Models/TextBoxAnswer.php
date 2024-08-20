@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TextBoxAnswer extends Model
+class TextboxAnswer extends Model
 {
     use HasFactory;
 

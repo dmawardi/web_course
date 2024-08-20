@@ -16,13 +16,12 @@ class ChapterFactory extends Factory
      */
     public function definition(): array
     {
-        $course = \App\Models\Course::factory()->create();
+       
         return [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
-            'media_link' => $this->faker->url,
             'order' => $this->faker->numberBetween(1, 25),
-            'course_id' => $course->id,
+            'course_id' => \App\Models\Course::factory(),
         ];
     }
 

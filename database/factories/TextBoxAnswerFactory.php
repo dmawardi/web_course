@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class TextBoxAnswerFactory extends Factory
 {
+    // Explicitly define the model's class
+    protected $model = \App\Models\TextBoxAnswer::class;
     /**
      * Define the model's default state.
      *
@@ -19,7 +21,6 @@ class TextBoxAnswerFactory extends Factory
         return [
             'alternative_answer' => $this->faker->sentence,
             'expected_answer' => $this->faker->sentence,
-            'is_correct' => $this->faker->boolean,
             'question_id' => \App\Models\Question::factory(),
         ];
     }

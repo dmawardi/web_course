@@ -17,13 +17,55 @@ class CourseFactory extends Factory
      */
     public function definition(): array
     {
-        $user = User::factory()->create();
         return [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
-            'created_by' => $user->id,
+            'created_by' => User::factory(),
             'media_link' => $this->faker->url,
             'is_published' => $this->faker->boolean,
         ];
+    }
+
+    /**
+     * Indicate that the course is published.
+     *
+     * @return \Database\Factories\CourseFactory
+     */
+    public function published(): CourseFactory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'is_published' => true,
+            ];
+        });
+    }
+
+    /**
+     * Indicate that the course is not published.
+     *
+     * @return \Database\Factories\CourseFactory
+     */
+    public function notPublished(): CourseFactory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'is_published' => false,
+            ];
+        });
+    }
+
+    /**
+     * Indicate that the course is created by a user.
+     *
+     * @param int $userId
+     * @return \Database\Factories\CourseFactory
+     */
+    public function createdBy(int $userId): CourseFactory
+    {
+        return $this->state(function (array $attributes) use ($userId) {
+            return [
+                'created_by' => $userId,
+            ];
+        });
     }
 }

@@ -18,7 +18,7 @@ class QuestionFactory extends Factory
     {
         return [
             'question_text' => $this->faker->sentence,
-            'question_type' => $this->faker->randomElement(['text', 'multiple_choice']),
+            'question_type' => $this->faker->randomElement(['text_box', 'multiple_choice']),
             'order' => $this->faker->numberBetween(1, 25),
             'module_id' => \App\Models\Module::factory(),
         ];
