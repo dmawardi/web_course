@@ -1,10 +1,10 @@
 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
     <div class="p-6 bg-white border-b border-gray-200">
-        @if($mediaLink)
+        <!-- @if($mediaLink)
             <div class="mb-4">
                 <img src="{{ $mediaLink }}" alt="{{ $title }}" class="w-full h-48 object-cover rounded-lg">
             </div>
-        @endif
+        @endif -->
 
         <h1 class="text-gray-900 text-xl font-semibold mb-2">
             {{ $title }}

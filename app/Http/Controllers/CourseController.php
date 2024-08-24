@@ -10,11 +10,8 @@ class CourseController extends Controller
     public function index()
     {
         // Use the Course model to get paginated courses with created_by user
-
-        $courses = Course::with('creator')->paginate(10);
-        return view('courses.index', [
-            'courses' => $courses
-        ]);
+        $courses = Course::with('creator')->paginate(10)->appends(request()->query());
+        return view('courses.index', compact('courses'));
     }
 
     public function create()

@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // For loop to create 10 courses created by the test user
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             $course = Course::factory()->create([
                 'created_by' => $user->id,
             ]);
