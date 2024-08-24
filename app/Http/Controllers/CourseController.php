@@ -4,13 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use Illuminate\Container\Attributes\Auth;
 
 class CourseController extends Controller
 {
     public function index()
     {
-        // Use the Course model to get paginated courses with created_by user
-        $courses = Course::with('creator')->paginate(10)->appends(request()->query());
+        // Grab user's ID
+        $userId = auth()->id();
+        // Use the Course model to get paginated courses that user has enrolled in
+        $courses = Course::whereHas('enrollments', function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        })->paginate(10)->appends(request()->query());
+        // $courses = Course::with('creator')->paginate(10)->appends(request()->query());
         return view('courses.index', compact('courses'));
     }
 
