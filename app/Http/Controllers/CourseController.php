@@ -43,9 +43,10 @@ class CourseController extends Controller
 
     public function show(Course $course)
     {
-        // Grab the course and eager load the chapters, For the chapter, eager load the modules
-        // $course = Course::with('chapters')->where('id', $course->id)->firstOrFail($course);
-
+        // Grab the course and eager load the chapters sorted by order
+        $course = Course::with(['chapters' => function ($query) {
+            $query->orderBy('order');
+        }])->findOrFail($course->id);
         return view('courses.show', compact('course'));
     }
 

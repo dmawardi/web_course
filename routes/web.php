@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ChapterController;
+use App\Http\Controllers\ModuleController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,7 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/courses/{course}', [CourseController::class, 'show'])->name('courses.show');
 
     // Chapters
-    Route::get('/courses/{course}/chapters/{chapter}', [ChapterController::class, 'show'])->name('chapters.show');
+    Route::get('/courses/{course}/chapters/{chapter}/module/{module}', [ModuleController::class, 'show'])->name('modules.show');
 });
 
 // Admin
