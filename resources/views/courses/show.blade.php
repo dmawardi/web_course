@@ -15,14 +15,11 @@
             </div>
              
              <!-- Button box -->
-             <div class="mt-8 flex justify-between">`
-                    <button-link class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                        Previous
-                    </button-link>
-                 <button-link class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">
-                     Start Chapter 1
-                 </button-link>
-             </div>
+            <x-course-nav-buttons
+            nextHref="{{route('chapters.show', [$course->id, 1])}}"
+            nextText="Start Chapter 1"
+            ></x-course-nav-buttons>
+            
          </div>
         <div class="w-4/12 bg-green-200 rounded-lg shadow-lg">
             <x-sidebar></x-sidebar>
