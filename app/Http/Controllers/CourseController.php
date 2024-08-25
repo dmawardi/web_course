@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\Chapter;
 use Illuminate\Container\Attributes\Auth;
 
 class CourseController extends Controller
@@ -42,7 +43,9 @@ class CourseController extends Controller
 
     public function show(Course $course)
     {
-        $course = Course::find($course);
+        // Grab the course and eager load the chapters, For the chapter, eager load the modules
+        // $course = Course::with('chapters')->where('id', $course->id)->firstOrFail($course);
+
         return view('courses.show', compact('course'));
     }
 

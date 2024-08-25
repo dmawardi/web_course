@@ -15,4 +15,9 @@ class Module extends Model
     {
         return $this->belongsTo(Chapter::class);
     }
+
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
+    }
 }

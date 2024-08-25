@@ -19,7 +19,7 @@ class CourseFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence,
-            'description' => $this->faker->paragraph,
+            'description' => $this->generateHtmlContent(),
             'created_by' => User::factory(),
             'media_link' => $this->faker->url,
             'is_published' => $this->faker->boolean,
@@ -67,5 +67,28 @@ class CourseFactory extends Factory
                 'created_by' => $userId,
             ];
         });
+    }
+
+     /**
+     * Generate HTML-rich content.
+     *
+     * @return string
+     */
+    protected function generateHtmlContent()
+    {
+        $faker = $this->faker;
+
+        // Generate random HTML content
+        $html = '<h1>' . $faker->sentence . '</h1>';
+        $html .= '<p>' . $faker->paragraphs(3, true) . '</p>';
+        $html .= '<h2>' . $faker->sentence . '</h2>';
+        $html .= '<ul>';
+        foreach ($faker->sentences(5) as $sentence) {
+            $html .= '<li>' . $sentence . '</li>';
+        }
+        $html .= '</ul>';
+        $html .= '<p>' . $faker->paragraphs(2, true) . '</p>';
+
+        return $html;
     }
 }
