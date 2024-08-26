@@ -11,18 +11,17 @@
          <div class="bg-white p-6 w-8/12">
             <h1 class="text-4xl font-bold text-green-700 mb-4">{{$course->title}}</h1>
             <div class="text-gray-600 mb-6">
-                 {!!$course->description!!}
+                {{$question}}
             </div>
              
              <!-- Button box -->
             <x-course-nav-buttons
             nextHref="{{route('modules.show', [$course->id, 1, 1])}}"
-            nextText="Start Chapter 1"
+            nextText="Next"
             ></x-course-nav-buttons>
-            
          </div>
         <div class="w-4/12 bg-green-200 rounded-lg shadow-lg mx-2 p-4">
-            <x-sidebar :chapters="$course->chapters" :currentChapter="$chapter->order" :currentModule="$module"></x-sidebar>
+            <x-sidebar :chapters="$course->chapters" :currentChapter="$chapter->order" :currentModule="$module" :currentQuestion="$question"></x-sidebar>
         </div>
      </div>
 </div>

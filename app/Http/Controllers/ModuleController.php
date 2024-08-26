@@ -11,8 +11,16 @@ class ModuleController extends Controller
 {
     public function show(Course $course, Chapter $chapter, Module $module)
     {
-        // Grab the module, as well as the associated chapter and course
-        $module = Module::with('chapter.course')->findOrFail($module->id);
+        $course = Course::with(['chapters' => function ($query) {
+            $query->orderBy('order');
+        }, 'chapters.modules'=> function ($query){
+            $query->orderBy('order');
+        }])->findOrFail($course->id);
+        // Grab the module, as well as the associated questions
+        $module = Module::with(['questions'=> function ($query) {
+            $query->orderBy('order');
+        }])->findOrFail($module->id);
+        dump($module);
         return view('modules.show', compact('course','chapter','module'));
     }
 }

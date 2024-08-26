@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\QuestionController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,6 +27,8 @@ Route::middleware('auth')->group(function () {
 
     // Chapters
     Route::get('/courses/{course}/chapters/{chapter}/module/{module}', [ModuleController::class, 'show'])->name('modules.show');
+    // Questions
+    Route::get('/courses/{course}/chapters/{chapter}/module/{module}/questions/{question}', [QuestionController::class, 'index'])->name('questions.show');
 });
 
 // Admin

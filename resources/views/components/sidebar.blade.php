@@ -1,4 +1,4 @@
-@props(['chapters'=>[], 'currentChapter'=>0, 'currentModule'=>0])
+@props(['chapters'=>[], 'currentChapter'=>0, 'currentModule'=>null, 'currentQuestion'=>0])
 <div>
     <h2 class="text-2xl font-semibold text-green-700 mb-4">Course Outline:</h2>
         <ul class="list-none space-y-2 text-gray-800 my-4 mx-4">
@@ -16,11 +16,27 @@
                     @foreach($chapter->modules as $module)
                     <li>
                     <div class="flex">
-                    <!-- Active chapter strip -->
-                    <div class="w-1 {{$module->order == $currentModule ? 'bg-orange-400' : ''}}"></div>
+                    <!-- Active strip -->
+                    <div class="w-1 {{$module->order == $currentModule->order ? 'bg-orange-400' : ''}}"></div>
                     <div class="w-11/12 ml-1">
                         {{$module->order}} - {{$module->title}}
                     </div>
+                    </div>
+                    @if(Route::currentRouteName() === 'modules.show' && $currentModule->questions->count() > 0 && $currentModule->id == $module->id)
+                    <ul class="list-none space-y-2 text-gray-800 ml-4">
+                        @foreach($currentModule->questions as $question)
+                        <li>
+                        <div class="flex">
+                        <!-- Active strip -->
+                        <div class="w-1 {{$question->order == $currentQuestion ? 'bg-orange-400' : ''}}"></div>
+                        <div class="w-11/12 ml-1">
+                            Q.{{$question->order}}
+                        </div>
+                        </li>
+                        @endforeach
+                    </ul>
+                    @endif
+
                     </li>
                     @endforeach
                 </ul>
