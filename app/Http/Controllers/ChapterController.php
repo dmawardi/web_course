@@ -13,6 +13,11 @@ class ChapterController extends Controller
         // Grab the chapter and eager load the modules
         $chapter = Chapter::with('modules')->where('id', $chapter->id)->firstOrFail($chapter);
 
-        return view('chapters.show', compact('chapter'));
+        // reroute to the first module in the chapter
+        return redirect()->route('modules.show', [
+            'course' => $course,
+            'chapter' => $chapter,
+            'module' => $chapter->modules->first()
+        ]);
     }
 }

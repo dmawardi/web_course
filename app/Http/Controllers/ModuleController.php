@@ -20,7 +20,6 @@ class ModuleController extends Controller
         $module = Module::with(['questions'=> function ($query) {
             $query->orderBy('order');
         }])->findOrFail($module->id);
-        dump($module);
         return view('modules.show', compact('course','chapter','module'));
     }
 }

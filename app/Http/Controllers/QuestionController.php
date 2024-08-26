@@ -45,9 +45,17 @@ class QuestionController extends Controller
 
     public function show(Course $course, Chapter $chapter, Module $module, Question $question)
     {
-        // $question = Question::find($question);
+        $course = Course::with(['chapters' => function ($query) {
+            $query->orderBy('order');
+        }, 'chapters.modules'=> function ($query){
+            $query->orderBy('order');
+        }])->findOrFail($course->id);
         // Find the other questions within the module
-        $module = Module::with('questions')->findOrFail($module->id);
+        $module = Module::with(['questions'=> function ($query) {
+            $query->orderBy('order');
+        }])->findOrFail($module->id);
+        dump($course);
+
         return view('questions.show', compact('course', 'chapter', 'module', 'question'));
     }
 

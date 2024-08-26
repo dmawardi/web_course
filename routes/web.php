@@ -26,9 +26,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/courses/{course}', [CourseController::class, 'show'])->name('courses.show');
 
     // Chapters
+    Route::get('/courses/{course}/chapters/{chapter}', [ChapterController::class, 'show'])->name('chapters.show');
+    // Modules
     Route::get('/courses/{course}/chapters/{chapter}/module/{module}', [ModuleController::class, 'show'])->name('modules.show');
     // Questions
-    Route::get('/courses/{course}/chapters/{chapter}/module/{module}/questions/{question}', [QuestionController::class, 'index'])->name('questions.show');
+    Route::get('/courses/{course}/chapters/{chapter}/module/{module}/questions/{question}', [QuestionController::class, 'show'])->name('questions.show');
 });
 
 // Admin

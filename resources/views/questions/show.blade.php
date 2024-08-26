@@ -21,7 +21,7 @@
             ></x-course-nav-buttons>
          </div>
         <div class="w-4/12 bg-green-200 rounded-lg shadow-lg mx-2 p-4">
-            <x-sidebar :chapters="$course->chapters" :currentChapter="$chapter->order" :currentModule="$module" :currentQuestion="$question"></x-sidebar>
+            <x-sidebar :course="$course" :currentChapter="$chapter->order" :currentModule="$module" :currentQuestion="$question->id"></x-sidebar>
         </div>
      </div>
 </div>

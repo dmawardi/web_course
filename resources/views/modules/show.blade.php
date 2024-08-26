@@ -22,7 +22,7 @@
             
          </div>
         <div class="w-4/12 bg-green-200 rounded-lg shadow-lg mx-2 p-4">
-            <x-sidebar :chapters="$course->chapters" :currentChapter="$chapter->order" :currentModule="$module"></x-sidebar>
+            <x-sidebar :course="$course" :currentChapter="$chapter->order" :currentModule="$module"></x-sidebar>
         </div>
      </div>
 </div>
