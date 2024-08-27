@@ -21,6 +21,11 @@ class QuestionFactory extends Factory
             'question_type' => $this->faker->randomElement(['text_box', 'multiple_choice']),
             'order' => $this->faker->numberBetween(1, 25),
             'module_id' => \App\Models\Module::factory(),
+            // Hints
+            'has_hints' => $this->faker->boolean,
+            'hint_1' => $this->faker->sentence,
+            'hint_2' => $this->faker->sentence,
+            'hint_3' => $this->faker->sentence,
         ];
     }
 }

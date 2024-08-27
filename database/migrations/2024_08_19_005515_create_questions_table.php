@@ -18,6 +18,11 @@ return new class extends Migration
             $table->enum('question_type', ['multiple_choice', 'text_box']);
             $table->text('question_text');
             $table->integer('order');
+            // Hints
+            $table->boolean('has_hints')->default(false);
+            $table->text('hint_1')->nullable();
+            $table->text('hint_2')->nullable();
+            $table->text('hint_3')->nullable();
             // Foreign Keys
             $table->foreignId('module_id')->constrained('modules');
         });
