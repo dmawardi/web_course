@@ -1,4 +1,4 @@
-@props(['chapters'=>[], 'currentChapter'=>0, 'currentModule'=>null, 'currentQuestion'=>0, 'course'=>null])
+@props(['currentChapter'=>0, 'currentModule'=>null, 'currentQuestion'=>0, 'course'=>null])
 <div>
     <h2 class="text-2xl font-semibold text-green-700 mb-4">Course Outline:</h2>
         <ul class="list-none space-y-2 text-gray-800 my-4 mx-4">
@@ -36,7 +36,7 @@
                         <!-- Question -->
                         @foreach($currentModule->questions as $question)
                         <li>
-                            <a href="{{ route('questions.show', ['course' => $course->id, 'chapter' => $chapter->id, 'module' => $module->id, 'question' => $question->id]) }}">
+                            <a href="{{ route('questions.show', ['course' => $course->id, 'chapter' => $chapter->id, 'module' => $module->id, 'question' => $question->order]) }}">
                             <div class="flex">
                             <!-- Active strip -->
                                 <div class="w-1 {{$question->id == $currentQuestion ? 'bg-orange-400' : ''}}"></div>

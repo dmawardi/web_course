@@ -43,7 +43,7 @@ class QuestionController extends Controller
     //     return redirect()->route('questions.index');
     // }
 
-    public function show(Course $course, Chapter $chapter, Module $module, Question $question)
+    public function show(Course $course, Chapter $chapter, Module $module, $questionOrder)
     {
         $course = Course::with(['chapters' => function ($query) {
             $query->orderBy('order');
@@ -54,7 +54,8 @@ class QuestionController extends Controller
         $module = Module::with(['questions'=> function ($query) {
             $query->orderBy('order');
         }])->findOrFail($module->id);
-        dump($course);
+
+        $question = Question::where('module_id', $module->id)->where('order', $questionOrder)->firstOrFail();
 
         return view('questions.show', compact('course', 'chapter', 'module', 'question'));
     }

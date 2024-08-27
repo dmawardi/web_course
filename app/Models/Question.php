@@ -10,7 +10,17 @@ class Question extends Model
     use HasFactory;
 
     protected $fillable = ['question', 'module_id', 'order'];
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'order';
+    }
 
+// Relationships
     public function module()
     {
         return $this->belongsTo(Module::class);

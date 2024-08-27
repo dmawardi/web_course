@@ -46,6 +46,8 @@ class CourseController extends Controller
         // Grab the course and eager load the chapters sorted by order
         $course = Course::with(['chapters' => function ($query) {
             $query->orderBy('order');
+        }, 'chapters.modules'=> function ($query){
+            $query->orderBy('order');
         }])->findOrFail($course->id);
         return view('courses.show', compact('course'));
     }

@@ -25,7 +25,7 @@
             <div>
 
             </div>
-            <x-sidebar :chapters="$course->chapters"></x-sidebar>
+            <x-sidebar :course="$course"></x-sidebar>
         </div>
      </div>
 </div>
