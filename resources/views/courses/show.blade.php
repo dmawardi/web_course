@@ -16,7 +16,7 @@
              
              <!-- Button box -->
             <x-course-nav-buttons
-            nextHref="{{route('modules.show', [$course->id, 1, 1])}}"
+            nextHref="{{$next}}"
             nextText="Start Chapter 1"
             ></x-course-nav-buttons>
             
