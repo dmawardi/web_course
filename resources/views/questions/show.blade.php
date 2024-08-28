@@ -16,12 +16,14 @@
              
              <!-- Button box -->
             <x-course-nav-buttons
-            nextHref="{{route('modules.show', [$course->id, 1, 1])}}"
+            prevHref="{{$previous}}"
+            
+            nextHref="{{$next}}"
             nextText="Next"
             ></x-course-nav-buttons>
          </div>
         <div class="w-4/12 bg-green-200 rounded-lg shadow-lg mx-2 p-4">
-            <x-sidebar :course="$course" :currentChapter="$chapter->order" :currentModule="$module" :currentQuestion="$question->id"></x-sidebar>
+            <x-sidebar :course="$course" :currentChapter="$chapter" :currentModule="$module" :currentQuestion="$question"></x-sidebar>
         </div>
      </div>
 </div>

@@ -49,7 +49,15 @@ class CourseController extends Controller
         }, 'chapters.modules'=> function ($query){
             $query->orderBy('order');
         }])->findOrFail($course->id);
-        return view('courses.show', compact('course'));
+
+        // Generate next link
+        $firstChapter = $course->chapters->first();
+        $firstModule = $firstChapter->modules->first();
+        $next = route('modules.show', [$course->id, $firstChapter->order, $firstModule->order]);
+        return view('courses.show', [
+            'course' => $course,
+            'next' => $next
+        ]);
     }
 
     public function edit(Course $course)
