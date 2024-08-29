@@ -16,8 +16,8 @@
              
              <!-- Button box -->
             <x-course-nav-buttons
-            prevHref="{{$previous}}"
-            
+            previousHref="{{$previous}}"
+            previousText="Previous"
             nextHref="{{$next}}"
             nextText="Next"
             ></x-course-nav-buttons>

@@ -42,10 +42,8 @@ class QuestionController extends Controller
 
         $question = Question::where('module_id', $module->id)->where('order', $questionOrder)->firstOrFail();
 
-        // Previous link
+        // BUild links
         $previous = $this->getPreviousLink($course, $chapter, $module, $question);
-
-        // Next link
         $next = $this->getNextLink($course, $chapter, $module, $question);
 
         return view('questions.show', [
@@ -60,20 +58,16 @@ class QuestionController extends Controller
 
     private function getPreviousLink($course, $chapter, $module, $question)
     {
-        // Previous link
         // If the question is the first question in the module, there is no previous question
+        // so, set previous link to module content page
         if ($question->id == $module->questions->first()->id) {
-            // Set previous link to module content page
-            $previous = route('modules.show', [$course->id, $chapter->id, $module->id]);
+            $previous = route('modules.show', [$course->id, $chapter->order, $module->order]);
         } else {
             // Else, there's a previous question
-            // Iterate through the module's questions to find the previous question
-            foreach ($module->questions as $key => $moduleQuestion) {
-                // If the current question is found, grab the previous question
-                if ($moduleQuestion->id == $question->id) {
-                    $previous = route('questions.show', [$course->id, $chapter->id, $module->id, $module->questions[$key - 1]->order]);
-                }
-            }
+            $currentQuestionIndex = $this->findIndexOfObjectById($module->questions, $question->id);
+            $previousQuestion = $module->questions[$currentQuestionIndex - 1];
+            // Set previous link to the previous question
+            $previous = route('questions.show', [$course->id, $chapter->order, $module->order, $previousQuestion->order]);
         }
 
         return $previous;
