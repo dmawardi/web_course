@@ -21,7 +21,7 @@
             ></x-course-nav-buttons>
             
          </div>
-        <div class="w-4/12 bg-green-200 rounded-lg shadow-lg mx-2 p-4">
+        <div class="w-4/12 bg-green-200 rounded-lg shadow-lg ml-2 p-4">
             <div>
 
             </div>

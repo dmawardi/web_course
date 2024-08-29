@@ -1,8 +1,17 @@
 @props(['currentChapter'=>0, 'currentModule'=>null, 'currentQuestion'=>null, 'course'=>null])
 <div>
     <h2 class="text-2xl font-semibold text-green-700 mb-4">Course Outline:</h2>
-        <ul class="list-none space-y-2 text-gray-800 my-4 mx-4">
-
+        <ul class="list-none space-y-2 text-gray-800 my-4 ml-4 text-sm">
+            <li>
+                <a href="{{ route('courses.show', $course->id) }}">
+                <div class="flex">
+                    <!-- Active strip -->
+                    <div class="ml-1">
+                        <strong>Course Overview</strong>
+                    </div>
+                </div>
+                </a>
+            </li>
         <!-- Chapters -->
             @foreach($course->chapters as $chapter)
             <li>
