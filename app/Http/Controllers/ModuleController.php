@@ -28,15 +28,23 @@ class ModuleController extends Controller
         $module = Module::where('chapter_id', $chapter->id)->where('order', $moduleOrder)->with(['questions'=> function ($query) {
             $query->orderBy('order');
         }])->firstOrFail();
-        
+
+        // Build next link
+        $next = $this->getNextLink($chapter, $module);
+
         // Build previous link
         // $previous = $this->getPreviousLink($course, $chapter, $module);
-        return view('modules.show', ['course'=>$course, 'chapter'=>$chapter, 'module'=>$module]);
+        return view('modules.show', [
+            'course'=>$course, 
+            'chapter'=>$chapter, 
+            'module'=>$module,
+            'next'=>$next
+        ]);
     }
 
-    private function getNextLink($module) {
+    private function getNextLink($chapter, $module) {
         // Get the first question of the current module
-        $firstQuestion = $module->questions->first();
+        return route('questions.show', [$chapter->course_id, $chapter->order, $module->order, $module->questions->first()->order]);
     }
 
     private function getPreviousLink($course, $chapter, $module) {

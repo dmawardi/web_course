@@ -100,7 +100,7 @@ class QuestionController extends Controller
                 // Otherwise, go to the next module in the current chapter
                 $currentModuleIndex = $this->findIndexOfObjectById($chapter->modules, $module->id);
                 $nextModule = $chapter->modules[$currentModuleIndex + 1];
-                $next = route('modules.show', [$course->id, $chapter->id, $nextModule->id]);
+                $next = route('modules.show', [$course->id, $chapter->order, $nextModule->order]);
             }
         } else {
             // Otherwise, go to the next question in the current module
@@ -108,7 +108,7 @@ class QuestionController extends Controller
             // Search questions for index of current question
             $currentQuestionIndex = $this->findIndexOfObjectById($moduleQuestions, $question->id);
             $nextQuestion = $moduleQuestions[$currentQuestionIndex+1];
-            $next = route('questions.show', [$course->id, $chapter->id, $module->order, $nextQuestion->order]);
+            $next = route('questions.show', [$course->id, $chapter->order, $module->order, $nextQuestion->order]);
         }
 
         return $next;

@@ -9,16 +9,16 @@
     <!-- Course Overview Section -->
      <div class="flex">
          <div class="bg-white p-6 w-8/12">
-            <h1 class="text-4xl font-bold text-green-700 mb-4">{{$course->title}}</h1>
+            <h1 class="text-4xl font-bold text-green-700 mb-4">{{$module->title}}</h1>
             <div class="text-gray-600 mb-6">
-                 {!!$course->description!!}
+                 {!!$module->description!!}
             </div>
              
              <!-- Button box -->
             <x-course-nav-buttons
             prevHref="$previous"
             prevText="Previous"
-            nextHref="{{route('questions.show', [$course->id, $chapter->order, $module->order, $module->questions->first()->order])}}"
+            :nextHref="$next"
             nextText="Next"
             ></x-course-nav-buttons>
             
