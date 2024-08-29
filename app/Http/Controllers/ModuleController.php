@@ -19,9 +19,11 @@ class ModuleController extends Controller
             $query->orderBy('order')->with(['questions'=> function ($query) {
                 $query->orderBy('order');
             }]);
-        }])->findOrFail($course->id);
+        }])->firstOrFail();
         // Find the chapter given the chapter order and course id
         $chapter = Chapter::where('course_id', $course->id)->where('order', $chapterOrder)->with(['modules'=> function ($query) {
+            $query->orderBy('order');
+        }, 'modules.questions' => function ($query) {
             $query->orderBy('order');
         }])->firstOrFail();
         // Find the other questions within the module
@@ -29,16 +31,16 @@ class ModuleController extends Controller
             $query->orderBy('order');
         }])->firstOrFail();
 
-        // Build next link
+        // Build links
         $next = $this->getNextLink($chapter, $module);
+        $previous = $this->getPreviousLink($course, $chapter, $module);
 
-        // Build previous link
-        // $previous = $this->getPreviousLink($course, $chapter, $module);
         return view('modules.show', [
             'course'=>$course, 
             'chapter'=>$chapter, 
             'module'=>$module,
-            'next'=>$next
+            'next'=>$next,
+            'previous'=>$previous
         ]);
     }
 
@@ -50,7 +52,6 @@ class ModuleController extends Controller
     private function getPreviousLink($course, $chapter, $module) {
          // Get the first module of the course
         $firstModule = $course->chapters->first()->modules->first();
-
         // If the current module is the first module of the course, return null
         if ($module->id == $firstModule->id) {
             return null;
@@ -58,28 +59,24 @@ class ModuleController extends Controller
 
         // Determine if the current module is the first in the chapter
         $isFirstModuleInChapter = $module->id == $chapter->modules->first()->id;
-
+        // If it's the first module in the chapter, get the last question of the last module of the previous chapter
         if ($isFirstModuleInChapter) {
             // Get the previous chapter
             $courseChapters = $course->chapters;
-            // Iterate through the chapters to get the previous chapter
-            foreach ($courseChapters as $key => $courseChapter) {
-                // If the current chapter is found, get the previous chapter
-                if ($courseChapter->id == $chapter->id) {
-                    $previousChapter = $courseChapters[$key - 1];
-                    break;
-                }
-            }        
+            $currentChapterIndex = $this->findIndexOfObjectById($courseChapters, $chapter->id);
+            $previousChapter = $courseChapters[$currentChapterIndex - 1];
 
-            // Get the last module and question of the previous chapter
+            // Get the last question of the last module of the previous chapter
             $previousModule = $previousChapter->modules->last();
             $previousQuestion = $previousModule->questions->last();
 
             return route('questions.show', [$course->id, $previousChapter->order, $previousModule->order, $previousQuestion->order]);
         } else {
-            // Get the previous module's final question within the current chapter
+            // In the current chapter, get the previous module's final question
             $chapterModules = $chapter->modules;
+            // Find the index of the current chapter
             $currentModuleIndex = $this->findIndexOfObjectById($chapterModules, $module->id);
+            // Obtain the previous module and grab the final question
             $previousModule = $chapterModules[$currentModuleIndex - 1];
             $previousQuestion = $previousModule->questions->last();
 
