@@ -4,8 +4,9 @@
             {{ __($course->title) }}
         </h2>
     </x-slot>
+    <div class="bg-blue-500 h-24 absolute"></div>
 
-    <div class="container mx-auto py-12 bg-white">
+    <div class="container mx-auto py-12 bg-white mt-10">
     <!-- Course Overview Section -->
      <div class="flex">
          <div class="bg-white p-6 w-8/12">
